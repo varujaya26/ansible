@@ -1,6 +1,6 @@
 Installing Ansible
 
-Launch 2 ubuntu machines
+Launch 2 ubuntu machines on AWS
 Create a common user
 $ sudo adducer ansible
 Change hostname to ansible controller
