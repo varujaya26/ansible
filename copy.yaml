@@ -1,0 +1,13 @@
+---
+-
+  hosts: ubu
+  user: ansible
+  become: true
+  tasks:
+    - name: Copy 2.txt into new file
+      ansible.builtin.copy:
+        src: 2.txt
+        dest: /tmp/2.txt
+        owner: ansible
+        group: ansible
+        mode: '0644'
