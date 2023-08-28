@@ -1,0 +1,69 @@
+Installing Ansible
+
+Launch 2 ubuntu machines
+Create a common user
+$ sudo adducer ansible
+Change hostname to ansible controller
+$ sudo vi /etc/hostname
+$ sudo reboot now
+Add ansible(controller username) as sudoer
+$ sudo visudo
+Enter the below command in the file
+>> ansible ALL=(ALL:ALL) NOPASSWD: ALL
+Change ssh password authentication to yes
+$ sudo vi /etc/ssh/sshd_config
+>>PasswordAuthentication yes
+Restart ssd service
+$ sudo service sshd restart
+Switch to user ansible
+$ sudo su - ansible
+Install Ansible
+https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html
+$ sudo apt update -y
+ $ sudo apt install software-properties-common
+$ sudo add-apt-repository --yes --update ppa:ansible/ansible
+$ sudo apt install ansible
+$ ansible —version
+Create a folder name demo
+$mkdir demo
+$ cd demo
+Create a new config file from GitHub https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
+$ vi ansible.cfg
+change inventory as hosts
+$ vi hosts
+$ansible —version
+(List the path of new config file)
+Create ssh key gen
+$ ssh-keygen
+Now copy the ssh id to the same machine
+$ ssh-copy-id 172.31.13.117
+Enter the username ansible password
+$ ansible -m ping all
+
+Connect to worker-host machine using ssh
+$ sudo adduser ansible
+Add ansible(controller username) as sudoer
+$ sudo visudo
+Enter the below command in the file
+>> ansible ALL=(ALL:ALL) NOPASSWD: ALL
+Change ssh password authentication to yes
+$ sudo vi /etc/ssh/sshd_config
+>>PasswordAuthentication yes
+Restart ssd service
+$ sudo service sshd restart
+Change hostname to worker-host
+$ sudo vi /etc/hostname
+$ sudo reboot now
+Adding host on ansible controller machine
+Open the hosts file and add group [ubu]
+Then the ip address of the worker-host
+>> Copy the ssh-keygen
+$ ssh-copy-id $worker-host-ip
+Testing ad-hoc commands
+Working Dir demo and Working User ansible
+$ ansible -m ping all
+$ ansible ubu —become -a “/sbin/reboot”
+Copying a file from controller to nodes 
+$ touch 1.txt
+$ echo “This is a sample file” > 1.txt
+$ ansible ubu -m copy -a "src=1.txt dest=/tmp/sample.txt"
