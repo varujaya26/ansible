@@ -1,0 +1,18 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Configure welcome message in a file
+      copy:
+        content: "Welcome to {{ ansible_distribution }} Linux"
+        dest: /etc/jmotd
+      notify: MOTD changed
+
+  handlers:
+    - name: MOTD changed
+      debug:
+        msg: The MOTD Changed 
