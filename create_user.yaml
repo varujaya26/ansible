@@ -1,0 +1,11 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  gather_facts: true
+  tasks:
+    - name: create user
+      user: 
+        name: "{{ item }}"
+      with_items: [ 'ravi', 'kanni', 'varu' ]

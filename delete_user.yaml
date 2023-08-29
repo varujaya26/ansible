@@ -1,0 +1,12 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  gather_facts: true
+  tasks:
+   - name: Deleting the user
+     user:
+       name: "{{ item }}"
+       state: absent
+     with_items: [ 'ravi', 'kanni', 'varu']
