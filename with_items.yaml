@@ -1,0 +1,21 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Message with with_items
+      copy:
+        content: "Welcome to {{ item }} Linux \n"
+        dest: \etc\kmotd
+      notify: MOTD Changed
+      with_items: [ 'UBUNTU', 'CENTOS' ]
+      when: ansible_distribution == item
+
+  handlers:
+    - name: MOTD changed
+      debug:
+        msg: The MOTD has changed
+
