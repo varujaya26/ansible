@@ -1,0 +1,15 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  tasks:
+    - name: Create random directory
+      file:
+        dest: "/home/varu/{{ item }}"
+        state: directory
+      with_random_choice:
+        - "aws"
+        - "azure"
+        - "gcp"
+        - "ibm"

@@ -1,0 +1,19 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  gather_facts: true
+  tasks:
+   - name: Deleting user with key pair values
+     user:
+       name: "{{ item.key }}"
+       comment: "{{ item.value.full_name }}"
+       state: absent
+     with_dict:
+        kan:
+          full_name: Prasana Kan
+        ravi:
+          full_name: Aarthi Ravi
+        varu:
+          full_name: Varalakshmi Jayapal 

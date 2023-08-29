@@ -1,0 +1,19 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Create user with item and key values
+      user:
+        name: "{{ item.key }}"
+        comment: "{{ item.value.full_name}}"
+      with_dict:
+        kan:
+          full_name: Prasana Kan
+        ravi:
+          full_name: Aarthi Ravi
+        varu:
+          full_name: Varalakshmi Jayapal
+

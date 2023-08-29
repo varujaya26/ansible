@@ -1,0 +1,15 @@
+---
+-
+  hosts: ubu
+  user: ansible
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Change file ownership, group and permissions
+      ansible.builtin.file:
+        path: /home/varu/
+        state: directory
+        recurse: yes
+        owner: ansible
+        group: ansible
+        mode: '0744'
