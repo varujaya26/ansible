@@ -1,0 +1,16 @@
+---
+-
+  hosts: dev
+  user: ansible
+  become: true
+  tasks:
+    - name: "Update Repository cache"
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+        force_apt_get: true 
+    - name: Install maven   
+      ansible.builtin.apt:
+        name: maven
+        state: present
+
