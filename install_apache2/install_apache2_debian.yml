@@ -1,0 +1,32 @@
+---
+- name: Install and Configure Apache2 on Ubuntu
+  hosts: servers
+  become: yes  # This enables privilege escalation, so the tasks are run as a superuser
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Copy Apache2 default configuration file
+      template:
+        src: default.conf.j2  # Template file for Apache2 default configuration
+        dest: /etc/apache2/sites-available/default
+      notify:
+        - Restart Apache2
+    
+    s- name: Enable Apache2 mod_rewrite
+      command: a2enmod rewrite
+      notify:
+        - Restart Apache2
+
+  handlers:
+    - name: Restart Apache2
+      service:
+        name: apache2
+        state: restarted
