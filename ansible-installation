@@ -13,7 +13,7 @@ Enter the below command in the file
 Change ssh password authentication to yes
 $ sudo vi /etc/ssh/sshd_config
 >>PasswordAuthentication yes
-Restart ssd service
+Restart sshd service
 $ sudo service sshd restart
 Switch to user ansible
 $ sudo su - ansible
